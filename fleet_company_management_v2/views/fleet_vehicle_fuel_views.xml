@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="fleet_vehicle_fuel_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.fuel.form</field>
+        <field name="model">fleet.vehicle.fuel</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Fuel Log">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="vehicle_id"/>
+                            <field name="date"/>
+                            <field name="fuel_type"/>
+                        </group>
+                        <group>
+                            <field name="liters"/>
+                            <field name="price_per_liter"/>
+                            <field name="total_cost" widget="monetary" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="odometer"/>
+                            <field name="previous_odometer"/>
+                            <field name="distance_traveled" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="consumption_per_100km" readonly="1"/>
+                            <field name="location"/>
+                            <field name="vendor_id"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes"/>
+                    </group>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="fleet_vehicle_fuel_tree" model="ir.ui.view">
+        <field name="name">fleet.vehicle.fuel.tree</field>
+        <field name="model">fleet.vehicle.fuel</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Fuel Logs">
+                <field name="date"/>
+                <field name="vehicle_id"/>
+                <field name="fuel_type"/>
+                <field name="liters"/>
+                <field name="total_cost" widget="monetary"/>
+                <field name="odometer"/>
+                <field name="consumption_per_100km"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="fleet_vehicle_fuel_search" model="ir.ui.view">
+        <field name="name">fleet.vehicle.fuel.search</field>
+        <field name="model">fleet.vehicle.fuel</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id"/>
+                <field name="fuel_type"/>
+                <field name="vendor_id"/>
+                <field name="date"/>
+                <group expand="1" string="Group By">
+                    <filter string="Vehicle" name="group_by_vehicle_id" context="{'group_by': 'vehicle_id'}"/>
+                    <filter string="Fuel Type" name="group_by_fuel_type" context="{'group_by': 'fuel_type'}"/>
+                    <filter string="Month" name="group_by_date" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="fleet_vehicle_fuel_graph" model="ir.ui.view">
+        <field name="name">fleet.vehicle.fuel.graph</field>
+        <field name="model">fleet.vehicle.fuel</field>
+        <field name="arch" type="xml">
+            <graph string="Fuel Analytics" type="bar">
+                <field name="vehicle_id" type="row"/>
+                <field name="total_cost" type="measure"/>
+                <field name="liters" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot View -->
+    <record id="fleet_vehicle_fuel_pivot" model="ir.ui.view">
+        <field name="name">fleet.vehicle.fuel.pivot</field>
+        <field name="model">fleet.vehicle.fuel</field>
+        <field name="arch" type="xml">
+            <pivot string="Fuel Summary">
+                <field name="vehicle_id" type="row"/>
+                <field name="fuel_type" type="col"/>
+                <field name="total_cost" type="measure"/>
+                <field name="liters" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="fleet_vehicle_fuel_action" model="ir.actions.act_window">
+        <field name="name">Fuel Logs</field>
+        <field name="res_model">fleet.vehicle.fuel</field>
+        <field name="view_mode">list,form,graph,pivot</field>
+        <field name="search_view_id" ref="fleet_vehicle_fuel_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_smiling_face">Create your first fuel log.</p>
+        </field>
+    </record>
+
+    <!-- Analytics Action -->
+    <record id="fleet_vehicle_fuel_analytics_action" model="ir.actions.act_window">
+        <field name="name">Fuel Analytics</field>
+        <field name="res_model">fleet.vehicle.fuel</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="fleet_vehicle_fuel_search"/>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_smiling_face">Analyze fuel consumption and costs.</p>
+        </field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_fleet_vehicle_fuel" name="Fuel Logs" parent="menu_fleet_root" action="fleet_vehicle_fuel_action" sequence="20"/>
+    <menuitem id="menu_fleet_fuel_analytics" name="Fuel Analytics" parent="menu_fleet_analytics" action="fleet_vehicle_fuel_analytics_action" sequence="20"/>
+</odoo>

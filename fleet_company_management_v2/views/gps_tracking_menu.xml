@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gps_tracking_action" model="ir.actions.act_url">
+        <field name="name">GPS Tracking</field>
+        <field name="url">/fleet/gps/tracking</field>
+        <field name="target">self</field>
+    </record>
+
+    <record id="gps_live_action" model="ir.actions.act_url">
+        <field name="name">Live GPS Tracking</field>
+        <field name="url">/fleet/gps/live</field>
+        <field name="target">self</field>
+    </record>
+
+    <record id="menu_gps_tracking" model="ir.ui.menu">
+        <field name="name">GPS Tracking</field>
+        <field name="sequence">40</field>
+        <field name="action" ref="gps_tracking_action"/>
+    </record>
+
+    <record id="menu_gps_live" model="ir.ui.menu">
+        <field name="name">Live Tracking</field>
+        <field name="parent_id" ref="menu_gps_tracking"/>
+        <field name="sequence">20</field>
+        <field name="action" ref="gps_live_action"/>
+    </record>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_vehicle_maintenance_user,fleet.vehicle.maintenance.user,model_fleet_vehicle_maintenance,base.group_user,1,1,1,0
+access_fleet_vehicle_maintenance_manager,fleet.vehicle.maintenance.manager,model_fleet_vehicle_maintenance,group_manager,1,1,1,1
+access_fleet_vehicle_fuel_user,fleet.vehicle.fuel.user,model_fleet_vehicle_fuel,base.group_user,1,1,1,0
+access_fleet_vehicle_fuel_manager,fleet.vehicle.fuel.manager,model_fleet_vehicle_fuel,group_manager,1,1,1,1
+access_fleet_vehicle_rate_user,fleet.vehicle.rate.user,model_fleet_vehicle_rate,base.group_user,1,1,1,0
+access_fleet_vehicle_rate_manager,fleet.vehicle.rate.manager,model_fleet_vehicle_rate,group_manager,1,1,1,1
+access_fleet_maintenance_import_user,fleet.maintenance.import.user,model_fleet_maintenance_import,group_manager,1,1,1,0

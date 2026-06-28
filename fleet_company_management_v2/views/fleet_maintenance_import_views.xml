@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="fleet_maintenance_import_form" model="ir.ui.view">
+        <field name="name">fleet.maintenance.import.form</field>
+        <field name="model">fleet.maintenance.import</field>
+        <field name="arch" type="xml">
+            <form string="Import Maintenance Records from Excel">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="file"/>
+                            <field name="filename"/>
+                        </group>
+                    </group>
+                    <div class="oe_chatter">
+                        <p class="text-muted">
+                            Upload an Excel file with the following sheets:<br/>
+                            الزيت (Oil), البنزين (Fuel), الكاوتش (Tires), تيل الفرامل (Brakes),<br/>
+                            البوجيهات (Spark Plugs), الكاتينة (Timing Belt), الطنابير (Hoses),<br/>
+                            الدبرياج (Clutch), البطارية (Battery), الصيانة العامة (General),<br/>
+                            خط السير (Route), مصروفات متنوعة (Misc), بيانات حادث (Accident)
+                        </p>
+                    </div>
+                </sheet>
+                <footer>
+                    <button name="import_maintenance_records" string="Import" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="fleet_maintenance_import_action" model="ir.actions.act_window">
+        <field name="name">Import Maintenance Records</field>
+        <field name="res_model">fleet.maintenance.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="menu_fleet_maintenance_import" name="Import from Excel" parent="menu_fleet_root" action="fleet_maintenance_import_action" sequence="100"/>
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Sequences -->
+        <record id="seq_fleet_vehicle_maintenance" model="ir.sequence">
+            <field name="name">Vehicle Maintenance</field>
+            <field name="code">fleet.vehicle.maintenance</field>
+            <field name="prefix">MNT/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_fleet_vehicle_fuel" model="ir.sequence">
+            <field name="name">Vehicle Fuel Log</field>
+            <field name="code">fleet.vehicle.fuel</field>
+            <field name="prefix">FUEL/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_fleet_vehicle_rate" model="ir.sequence">
+            <field name="name">Vehicle Rate</field>
+            <field name="code">fleet.vehicle.rate</field>
+            <field name="prefix">RATE/</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

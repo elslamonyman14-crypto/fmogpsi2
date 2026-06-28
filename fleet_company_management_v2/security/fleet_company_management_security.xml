@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- GPS Tracking Group -->
+        <record id="group_gps" model="res.groups">
+            <field name="name">GPS Tracking</field>
+            <field name="category_id" ref="base.module_category_fleet"/>
+        </record>
+
+        <!-- Fleet Company Management User Group -->
+        <record id="group_user" model="res.groups">
+            <field name="name">Fleet Company User</field>
+            <field name="category_id" ref="base.module_category_fleet"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Fleet Company Management Manager Group -->
+        <record id="group_manager" model="res.groups">
+            <field name="name">Fleet Company Manager</field>
+            <field name="category_id" ref="base.module_category_fleet"/>
+            <field name="implied_ids" eval="[(4, ref('group_user')), (4, ref('group_gps'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+        </record>
+    </data>
+</odoo>

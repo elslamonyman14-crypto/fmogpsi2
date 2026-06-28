@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Fleet Company Menu -->
+    <menuitem id="menu_fleet_root" name="Fleet Company" sequence="65"/>
+    <menuitem id="menu_fleet_analytics" name="Analytics" parent="menu_fleet_root" sequence="90"/>
+</odoo>
