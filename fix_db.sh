@@ -1,0 +1,23 @@
+#!/bin/bash
+echo "Listing all databases..."
+docker compose exec -T db psql -U odoo -d postgres -c "\l"
+echo ""
+echo "Please enter your Odoo database name from the list above:"
+read dbname
+echo ""
+echo "Adding columns to database: $dbname"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_access_token VARCHAR;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_sync_interval INTEGER DEFAULT 5;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_auto_sync BOOLEAN DEFAULT FALSE;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_api_url VARCHAR;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_api_key VARCHAR;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_enabled BOOLEAN DEFAULT FALSE;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_last_sync TIMESTAMP;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_token_expiry TIMESTAMP;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_username VARCHAR;"
+docker compose exec -T db psql -U odoo -d $dbname -c "ALTER TABLE res_company ADD COLUMN IF NOT EXISTS itrack_password VARCHAR;"
+echo "Database columns added successfully!"
+echo ""
+echo "Restarting Odoo to load updated module..."
+docker compose restart odoo18
+echo "Odoo restarted. Please wait a moment for it to fully start."
